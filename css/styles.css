@@ -1,0 +1,11 @@
+body{
+    background-color:#32cd32 ;
+}
+.contenedor-formulario{
+  display: flex;
+  justify-content: center;
+  background: #e2dedb;
+  color: #b3aca7;
+    width: 500px;
+    margin: 50px auto 100px auto;
+}
