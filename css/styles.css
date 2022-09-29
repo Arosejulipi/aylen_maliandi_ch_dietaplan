@@ -1,5 +1,11 @@
+* {
+  margin: 0%;
+  padding: 5px;
+  box-sizing: border-box; }
 body{
-    background-color:#32cd32 ;
+    background-image: url(/assets.img/fondos-escritorio-fondo-limon-vector-lindo_53876-136875.webp);
+    size-adjust:unset;
+    color: #1F371F
 }
 .contenedor-formulario{
   display: flex;
@@ -8,4 +14,7 @@ body{
   color: #b3aca7;
     width: 500px;
     margin: 50px auto 100px auto;
+}
+.card{
+  background-color: #FFCE67;
 }
