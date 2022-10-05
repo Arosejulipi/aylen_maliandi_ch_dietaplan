@@ -7,14 +7,151 @@ body{
     size-adjust:unset;
     color: #1F371F
 }
-.contenedor-formulario{
-  display: flex;
-  justify-content: center;
-  background: #e2dedb;
-  color: #b3aca7;
-    width: 500px;
-    margin: 50px auto 100px auto;
-}
+
+
+
 .card{
   background-color: #FFCE67;
 }
+.intro{
+text-align:justify;
+}
+
+.team-boxed p {
+  color:#000203;
+}
+
+.team-boxed h2 {
+  font-weight:bold;
+  margin-bottom:40px;
+  padding-top:40px;
+  color:inherit;
+}
+
+@media (max-width:767px) {
+  .team-boxed h2 {
+    margin-bottom:25px;
+    padding-top:25px;
+    font-size:24px;
+  }
+}
+
+.team-boxed .intro {
+  font-size:16px;
+  max-width:500px;
+  margin:0 auto;
+}
+
+.team-boxed .intro p {
+  margin-bottom:0;
+}
+
+.team-boxed .people {
+  padding:50px 0;
+}
+
+.team-boxed .item {
+  text-align:center;
+}
+
+.team-boxed .item .box {
+  text-align:center;
+  padding:30px;
+  background-color:#f1dfc7;
+  margin-bottom:30px;
+}
+
+.team-boxed .item .name {
+  font-weight:bold;
+  margin-top:28px;
+  margin-bottom:8px;
+  color:inherit;
+}
+
+.team-boxed .item .title {
+  text-transform:uppercase;
+  font-weight:bold;
+  color:#d0d0d0;
+  letter-spacing:2px;
+  font-size:13px;
+}
+
+.team-boxed .item .description {
+  font-size:15px;
+  margin-top:15px;
+  margin-bottom:20px;
+}
+
+.team-boxed .item img {
+  max-width:160px;
+}
+
+.team-boxed .social {
+  font-size:18px;
+  color:#a2a8ae;
+}
+
+.team-boxed .social a {
+  color:inherit;
+  margin:0 10px;
+  display:inline-block;
+  opacity:0.7;
+}
+
+.team-boxed .social a:hover {
+  opacity:1;
+}
+
+.foto{
+  object-fit: cover;}
+
+  .btn {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    background-color: transparent;
+    border: 2px solid #e74c3c;
+    border-radius: 0.6em;
+    color: #e74c3c;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-self: center;
+        -ms-flex-item-align: center;
+            align-self: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+  .btn:hover, .btn:focus {
+    color: #d4d4b8;
+    outline: 0;
+  }
+  
+
+  .second {
+    border-radius: 3em;
+    border-color: #3B532F;
+    color: rgb(212, 212, 184);
+    background-image: -webkit-linear-gradient(left, rgba(37, 53, 29, 1),rgba(37, 53, 29, 1) 5%, #25351D 5%, #25351D 10%, rgba(37, 53, 29, 1) 10%,  rgba(37, 53, 29, 1) 15%, #25351D 15%, #25351D 20%,rgba(37, 53, 29, 1) 20%,rgba(37, 53, 29, 1) 25%, #25351D 25%, #25351D 30%, rgba(37, 53, 29, 1) 30%, rgba(37, 53, 29, 1) 35%, #25351D 35%, #25351D 40%, rgba(37, 53, 29, 1) 40%, rgba(37, 53, 29, 1) 45%, #25351D 45%, #25351D 50%, rgba(37, 53, 29, 1) 50%, rgba(37, 53, 29, 1) 55%, #25351D 55%, #25351D 60%, rgba(37, 53, 29, 1) 60%, rgba(37, 53, 29, 1) 65%, #3B532F 65%, #3B532F 70%,rgba(37, 53, 29, 1) 70%, rgba(37, 53, 29, 1) 75%, #25351D 75%, #25351D 80%,rgba(37, 53, 29, 1) 80%, rgba(37, 53, 29, 1) 85%, #25351D 85%, #25351D 90%, rgba(37, 53, 29, 1) 90%, rgba(37, 53, 29, 1) 95%, #25351D 95%, #25351D 100%);
+    background-image: linear-gradient(to right,  rgba(37, 53, 29, 1),  rgba(37, 53, 29, 1) 5%, #3B532F 5%, #3B532F 10%,  rgba(37, 53, 29, 1) 10%,  rgba(37, 53, 29, 1) 15%, #3B532F 15%, #3B532F 20%, rgba(37, 53, 29, 1)20%, rgba(37, 53, 29, 1) 25%, #3B532F 25%, #3B532F 30%, rgba(37, 53, 29, 1) 30%, rgba(37, 53, 29, 1) 35%, #3B532F 35%, #3B532F 40%, rgba(37, 53, 29, 1) 40%, rgba(37, 53, 29, 1) 45%, #3B532F, #3B532F 50%, rgba(37, 53, 29, 1) 50%, rgba(37, 53, 29, 1) 55%, #3B532F 55%, #3B532F 60%, rgba(37, 53, 29, 1) 60%, rgba(37, 53, 29, 1) 65%, #3B532F 65%, #3B532F 70%, rgba(37, 53, 29, 1) 70%, rgba(37, 53, 29, 1) 75%, #3B532F 75%, #3B532F 80%, rgba(37, 53, 29, 1) 80%, rgba(37, 53, 29, 1) 85%, #3B532F 85%, #3B532F 90%, rgba(37, 53, 29, 1) 90%, rgba(37, 53, 29, 1) 95%, #3B532F 95%, #3B532F 100%);
+    background-position: 0 0;
+    background-size: 100%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+  }
+  .second:hover {
+    background-position: 100px;
+  }
+
+
