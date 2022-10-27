@@ -1,213 +1,112 @@
+const contenedorProductos = document.getElementById('contenedor-productos')
+const contenedorCarrito = document.getElementById('carrito-contenedor')
+const botonVaciar = document.getElementById('vaciar-carrito')
+const contadorCarrito = document.getElementById('contadorCarrito')
+const cantidad = document.getElementById('cantidad')
+const precioTotal = document.getElementById('precioTotal')
+const cantidadTotal = document.getElementById('cantidadTotal')
 
-let str2 = "h2";
-let elem2 =
-document.createElement(str2);
-elem2.innerText ="POSTRES";
-document.body.appendChild(elem2);
+let carrito = []
 
-
-
-const postres = [
-    {
-        id: 1,
-        nombre: 'Bizcochos de almendra VEGANO',
-        precio: 1200,
-        imagen: '../assets.img/bizcocho-vegano-xl-668x400x80xX.jpg'
-    },
-    {
-        id: 2,
-        nombre: 'Tarta de cous-cous y arándanos VEGANO',
-        precio: 2300,
-        imagen: '../assets.img/0141-tarta-cous-cous-arandanos-xl-668x400x80xX.jpg'
-    },
-    {
-        id: 3,
-        nombre: 'Barras ceto-crujientes con chocolate VEGANO',
-        precio: 2000,
-        imagen: '../assets.img/barritas-crujientes-de-chocolate-keto-02.jpg'
-    },
-    {
-        id: 4,
-        nombre: 'Tarta de zanahoria y coco VEGETARIANO',
-        precio: 1800,
-        imagen: '../assets.img/34d81b581992-tarta-de-zanahoria-y-coco.jpg'
-    },
-	{
-        id: 5,
-        nombre: 'Clafoutis VEGETARIANO',
-        precio: 2500,
-        imagen: '../assets.img/4bd91d3b08e2-clafoutis.jpg'
-    },
-	{
-        id: 6,
-        nombre: 'Trufas de cava y frambuesa OMNÍVERO',
-        precio: 800,
-        imagen: '../assets.img/bizcocho-vegano-xl-668x400x80xX.jpg'
-    },
-	{
-        id: 7,
-        nombre: 'Tarta de queso con arándanos OMNÍVERO',
-        precio: 1700,
-        imagen: '../assets.img/1366_2000.jpg'
-    },
-	{
-        id: 8,
-        nombre: 'Mousse de limón OMNÍVERO',
-        precio: 1500,
-        imagen: '../assets.img/Mousse-de-limón-con-salsa-de-frutos-rojos.webp'
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('carrito')){
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        actualizarCarrito()
     }
-];
-localStorage.setItem("postres", JSON.stringify(postres));
+})
+
+botonVaciar.addEventListener('click', () => {
+    carrito.length = 0
+    actualizarCarrito()
+    guardarStorage();
+})
+
+//lo q se ve en el html
+
+productos.forEach((producto) => {
+    const div = document.createElement('div')
+    div.classList.add('producto')
+    div.innerHTML = `
+    <img src=${producto.imagen} alt= "">
+        <h3 class="precioProducto">$ ${producto.precio}</h3>
+    <h2>${producto.nombre}</h2>
+    <p>${producto.descripcion}</p>
+
+    <button id="agregar${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+    `
+
+    contenedorProductos.appendChild(div)
+
+    const boton = document.getElementById(`agregar${producto.id}`)
+    boton.addEventListener('click', () => {
+        agregarAlCarrito(producto.id)
+    })
+})
 
 
-let carrito = [];
-let carritoStorage = JSON.parse(localStorage.getItem("carritoStorage"));
-const divisa = '$';
-const DOMitems = document.querySelector('#items');
-const DOMcarrito = document.querySelector('#carrito');
-const DOMtotal = document.querySelector('#total');
-const DOMbotonVaciar = document.querySelector('#boton-vaciar');
 
 
-// carro de compra NO TERMINADO
-// Funciones
+const agregarAlCarrito = (prodId) => {
 
+    //para que no se repita al aumentra la cantidad 
+    const siEsta = carrito.some (prod => prod.id === prodId) 
 
-if(carritoStorage){
-    carrito = carritoStorage;
-}
-
-
-function entregarProductos() {
-	let postres = JSON.parse(localStorage.getItem("postres"));
-    postres.forEach((info) => {
-    
-        const miNodo = document.createElement('div');
-        miNodo.classList.add('card', 'col-sm-4');
-  
-        const miNodoCardBody = document.createElement('div');
-        miNodoCardBody.classList.add('card-body');
-  
-        const miNodoTitle = document.createElement('h5');
-        miNodoTitle.classList.add('card-title');
-        miNodoTitle.textContent = info.nombre;
+    if (siEsta){ 
+        const prod = carrito.map (prod => { 
+            if (prod.id === prodId){
+                prod.cantidad++
+            }
+        })
+    } else { 
+        const item = productos.find((prod) => prod.id === prodId)
+        carrito.push(item)
+    }
    
-        const miNodoImagen = document.createElement('img');
-        miNodoImagen.classList.add('img-fluid');
-        miNodoImagen.setAttribute('src', info.imagen);
-    
-        const miNodoPrecio = document.createElement('p');
-        miNodoPrecio.classList.add('card-text');
-        miNodoPrecio.textContent = `${info.precio}${divisa}`;
-        
-        const miNodoBoton = document.createElement('button');
-        miNodoBoton.classList.add('btn', 'btn-primary');
-        miNodoBoton.textContent = '✚';
-        miNodoBoton.setAttribute('marcador', info.id);
-        miNodoBoton.addEventListener('click', agregarProductoAlCarrito);
-      
-        miNodoCardBody.appendChild(miNodoImagen);
-        miNodoCardBody.appendChild(miNodoTitle);
-        miNodoCardBody.appendChild(miNodoPrecio);
-        miNodoCardBody.appendChild(miNodoBoton);
-        miNodo.appendChild(miNodoCardBody);
-        DOMitems.appendChild(miNodo);
-    });
+   
+    actualizarCarrito() 
+}
+//para que al refrescar la página no se pierda los productos, ni se recuperen los eliminados previamente
+function guardarStorage() {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }
+const eliminarDelCarrito = (prodId) => {
+    const item = carrito.find((prod) => prod.id === prodId)
+
+    const indice = carrito.indexOf(item) 
+
+    carrito.splice(indice, 1) 
+    actualizarCarrito() 
+    console.log(carrito)
+    guardarStorage();
 }
 
-/**
- * Añado producto
- */
-function agregarProductoAlCarrito(evento) {
-	let postres = JSON.parse(localStorage.getItem("postres"));
+const actualizarCarrito = () => {
 
-    carrito.push(evento.target.getAttribute('marcador'))
+    contenedorCarrito.innerHTML = "" 
 
-    entregarCarrito();
-	guardarCarritoStorage();
+    //carrito adentro
+    carrito.forEach((prod) => {
+        const div = document.createElement('div')
+        div.className = ('productoEnCarrito')
+        div.innerHTML = `
+        <p>⌘${prod.nombre}</p>
+        <p>$${prod.precio}</p>
+        <p>Cant:<span id="cantidad">${prod.cantidad}</span></p>
+        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+        `
 
-}
+        contenedorCarrito.appendChild(div)
+        localStorage.setItem('carrito', JSON.stringify(carrito))
 
-
-function entregarCarrito() {
-
-    DOMcarrito.textContent = '';
+    })
   
-    const carritoSinDuplicados = [...new Set(carrito)];
+    contadorCarrito.innerText = carrito.length 
+    console.log(carrito)
+    precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
  
-    carritoSinDuplicados.forEach((item) => {
-
-        const miItem = postres.filter((itempostres) => {
-      
-            return itempostres.id === parseInt(item);
-        });
-
-        const numeroUnidadesItem = carrito.reduce((total, itemId) => {
-
-            return itemId === item ? total += 1 : total;
-        }, 0);
-
-        const miNodo = document.createElement('li');
-        miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-        miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
-        // para borrar
-        const miBoton = document.createElement('button');
-        miBoton.classList.add('btn', 'btn-danger', 'mx-5');
-        miBoton.textContent = '╳';
-        miBoton.style.marginLeft = '2rem';
-        miBoton.dataset.item = item;
-        miBoton.addEventListener('click', borrarItemCarrito);
-
-        miNodo.appendChild(miBoton);
-        DOMcarrito.appendChild(miNodo);
-    });
-
-    DOMtotal.textContent = calcularTotal();
-}
-
-/**
- *  para borrar 
- */
-function borrarItemCarrito(evento) {
-
-    const id = evento.target.dataset.item;
-
-    carrito = carrito.filter((carritoId) => {
-        return carritoId !== id;
-    });
-
-    entregarCarrito();
-	guardarCarritoStorage();
 }
 
 
-function calcularTotal() {
-
-    return carrito.reduce((total, item) => {
-
-        const miItem =postres.filter((itempostres) => {
-            return itempostres.id === parseInt(item);
-        });
-        // para el total
-        return total + miItem[0].precio;
-    }, 0).toFixed(2);
-}
 
 
-function vaciarCarrito() {
 
-    carrito = [];
-
-    entregarCarrito();
-	guardarCarritoStorage();
-}
-
-
-DOMbotonVaciar.addEventListener('click', vaciarCarrito);
-
-
-entregarProductos();
-entregarCarrito();
-let guardarCarritoStorage = () => {
-    localStorage.setItem("carritoStorage", JSON.stringify(carrito));
-}
