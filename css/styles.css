@@ -106,7 +106,7 @@ p {
 
 .modal-carrito {
   position: relative;
-  background-image: url(/assets.img/HD-wallpaper-fruits-aesthetic-orange.jpg);
+  background-image: url(/assets.img/fondo-escritorio-frutas-vector-lindo_53876-140209.webp);
   min-width: 500px;
   padding: 20px;
   margin-top: -100%;
@@ -128,8 +128,7 @@ p {
   font-size: 20px;
   color: #FFCE67;
   border: none;
-  background-color: #ffffff;
-  background-image: url(/assets.img/HD-wallpaper-fruits-aesthetic-orange.jpg);
+  background-color: transparent;
 }
 .modal-carrito #carritoCerrar:hover {
   cursor: pointer;
